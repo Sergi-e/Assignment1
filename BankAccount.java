@@ -1,3 +1,6 @@
+
+import com.sun.tools.javac.Main;
+
 public class BankAccount{
     public enum AccountType{
         CURRENT, SAVINGS
@@ -13,7 +16,7 @@ public class BankAccount{
     private static final double CURRENT_ACCT_MIN_BALANCE;
     private static final double SAVINGS_ACCT_MIN_BALANCE;
 
-    private double interestRate;
+    private double interestRate; // annual interest rate 
     private double maintenanceFee;
     private int withdrawalLimit;
 
@@ -114,14 +117,56 @@ public class BankAccount{
 
     //Method G
     public void deposit(double amount){
+        if( amount<=0){
+            System.out.println("Invalid Amount");
+            return; // stopping the process
+        }
         balance+=amount;
+
+        inTheRed=(balance<minBalance);
+        System.out.print("Funds deposed successfully");
     }
     //Method H
     public void performMonthlyMaintenance(){
+        
+        double earnedInterest=balance * (interestRate/12);
+        balance+= earnedInterest;
+        balance-=maintenanceFee;
+        inTheRed=(balance<minBalance);
 
-    }
+        numWithdrawals=0;
+
+        System.out.println("Earned Interest: <" +earnedInterest + ">");
+        System.out.println("Maintenance fee: <" +maintenanceFee + ">");
+        System.out.println("Updated balance: <" +balance + ">");
+
+        if (inTheRed){
+            System.out.println("WARNING: This account is in the red!");
+        }
+     }
+
     //Method I
-    public boolean transfer(){
-
+    public boolean transfer(boolean transferTo, BankAccount otherAccount, double transAmount ){
+        if (transferTo){
+            //from this account to otherAccount
+            if (this.withdraw(transAmount)){
+                otherAccount.deposit(transAmount);
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+         else{
+            //from otherAccount to this account
+            if(otherAccount.withdraw(transAmount)){
+                this.deposit(transAmount);
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
     }
 }
+
