@@ -5,8 +5,8 @@ public class TestBankAccount {
         BankAccount currObj=new BankAccount(BankAccount.AccountType.CURRENT, "Curr202");
 
         //The  get methods 
-        System.out.println("Here is the current ID:" +currObj.getAccountID());
-        System.out.println("Account Type:"+ savObj.getAccountType());
+        System.out.println("Here is the CURRENT account ID:" +currObj.getAccountID());
+        System.out.println("Here is the SAVINGS account type:"+ savObj.getAccountType());
         System.out.println("The current balance:" +currObj.getBalance());
         System.out.println("Minimum balance for savings:" +savObj.getMinBalance());
 
@@ -28,7 +28,9 @@ public class TestBankAccount {
         currObj.transfer(false, savObj, 100); 
 
         //The balance at the end
-        System.out.println("The Current balance:" + currObj.getBalance());
-        System.out.println("The Savings balance:" +savObj.getBalance());
+        System.out.println("The Current balance:" + String.format("%.2f", currObj.getBalance()));
+        System.out.println("The Savings balance:" + String.format("%.2f", savObj.getBalance()));
+        
+        // I used the string.format to round the balances. They were coming unrounded.
     }
 }
