@@ -21,7 +21,7 @@ public class BankAccount{
     private static final double CURRENT_ACCT_MAINTENANCE_FEE=10.0;
     private static final double SAVINGS_WITHDRAWAL_LIMIT=2;
 
-    //Constructors
+    //The first constructor
     public BankAccount (AccountType type, String id ){
         this.acctType=type;
         this.acctID=id;
@@ -122,7 +122,7 @@ public class BankAccount{
         balance+=amount;
 
         inTheRed=(balance<minBalance);
-        System.out.println("Funds deposited successfully. New balance" + balance);
+        System.out.println("Funds deposited successfully. New balance:" + balance);
     }
     //Method H
     public void performMonthlyMaintenance(){
