@@ -1,6 +1,3 @@
-
-import com.sun.tools.javac.Main;
-
 public class BankAccount{
     public enum AccountType{
         CURRENT, SAVINGS
@@ -13,15 +10,15 @@ public class BankAccount{
     private double minBalance;
 
     //the constants
-    private static final double CURRENT_ACCT_MIN_BALANCE;
-    private static final double SAVINGS_ACCT_MIN_BALANCE;
+    private static final double CURRENT_ACCT_MIN_BALANCE=300.0;
+    private static final double SAVINGS_ACCT_MIN_BALANCE=200.0;
 
     private double interestRate; // annual interest rate 
     private double maintenanceFee;
     private int withdrawalLimit;
 
     private static final double SAVINGS_ACCT_INTEREST_RATE=0.05;
-    private static final double CURRENT_ACCT_MAINTENANCE_FEE;
+    private static final double CURRENT_ACCT_MAINTENANCE_FEE=10.0;
     private static final double SAVINGS_WITHDRAWAL_LIMIT=2;
 
     //Constructors
@@ -81,14 +78,14 @@ public class BankAccount{
         return this.acctID;
     }
     //Method E
-    public double getMiniBalance(){
+    public double getMinBalance(){
         return this.minBalance;
     }
     //Method F
     public boolean withdraw(double amount){
         // checking the amount validity
         if (amount<=0){
-            System.out.print("Invalid amount");
+            System.out.println("Invalid amount");
             return false;
         }
         //checking whether it is in red
@@ -105,13 +102,14 @@ public class BankAccount{
         
         //checking for if the balance is sufficient
         if (balance-amount < minBalance){
-            System.out.print("Sorry, could not perform withdrawal: Insufficient balance");
+            System.out.println("Sorry, could not perform withdrawal: Insufficient balance");
             return false;
         }
 
         balance-=amount;
         numWithdrawals++;
-        System.out.println("Money withdrawn sucessfully");
+        System.out.println("Money withdrawn successfully. New balance:" + balance);
+        inTheRed=(balance<minBalance);
         return true;
     }
 
@@ -124,7 +122,7 @@ public class BankAccount{
         balance+=amount;
 
         inTheRed=(balance<minBalance);
-        System.out.print("Funds deposed successfully");
+        System.out.println("Funds deposited successfully. New balance" + balance);
     }
     //Method H
     public void performMonthlyMaintenance(){
@@ -136,9 +134,9 @@ public class BankAccount{
 
         numWithdrawals=0;
 
-        System.out.println("Earned Interest: <" +earnedInterest + ">");
-        System.out.println("Maintenance fee: <" +maintenanceFee + ">");
-        System.out.println("Updated balance: <" +balance + ">");
+        System.out.println("Earned Interest: <" + earnedInterest + ">");
+        System.out.println("Maintenance fee: <" + maintenanceFee + ">");
+        System.out.println("Updated balance: <" + balance + ">");
 
         if (inTheRed){
             System.out.println("WARNING: This account is in the red!");
