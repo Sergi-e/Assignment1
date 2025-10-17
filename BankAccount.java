@@ -108,7 +108,7 @@ public class BankAccount{
 
         balance-=amount;
         numWithdrawals++;
-        System.out.println("Money withdrawn successfully. New balance:" + balance);
+        System.out.println("Money withdrawn successfully. New balance:" + String.format("%.2f",  balance));
         inTheRed=(balance<minBalance);
         return true;
     }
@@ -134,9 +134,9 @@ public class BankAccount{
 
         numWithdrawals=0;
 
-        System.out.println("Earned Interest: <" + earnedInterest + ">");
+        System.out.println("Earned Interest: <" + String.format("%.2f",earnedInterest)  + ">");
         System.out.println("Maintenance fee: <" + maintenanceFee + ">");
-        System.out.println("Updated balance: <" + balance + ">");
+        System.out.println("Updated balance: <" + String.format("%.2f", balance)+ ">");
 
         if (inTheRed){
             System.out.println("WARNING: This account is in the red!");
@@ -168,3 +168,4 @@ public class BankAccount{
     }
 }
 
+// I used string.format to round the numbers to two decimal points.
